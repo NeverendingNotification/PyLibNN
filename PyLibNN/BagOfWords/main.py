@@ -5,7 +5,7 @@ from AbsPreProcess import PreProcess as PreProcess
 from AbsTexts2Vectors import Texts2Vectors as Texts2Vectors
 
 def makeDefaultSetting():
-    Rd=ReadData([],targetDir="/tmp/")
+    Rd=ReadData([],targetDir="/tmp/arXiv_pdf_1305_007")
     Sw=StopWords()
     Pp=PreProcess(lowerLimit=2)
     Tv=Texts2Vectors()
