@@ -4,6 +4,7 @@ class BOWData:
     def show():
         pass
 
+
 class BOWDataRaw(BOWData):
     def __init__(self,name,words):
         self.name=name.split("/")[-1]
