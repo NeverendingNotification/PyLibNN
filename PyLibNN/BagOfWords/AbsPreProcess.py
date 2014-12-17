@@ -9,11 +9,15 @@ class PreProcess:
     def preprocess(self,dataSets):
         values=dataSets.getValues()
         dictionary=gensim.corpora.Dictionary(values)
+        print "Make Dict"
         dataSets.setDictionary(dictionary)
         unfiltered=dictionary.token2id.keys()
         dictionary.filter_extremes(no_below=self.lowerLimit)
         filtered=dictionary.token2id.keys()
         removed=set(unfiltered)-set(filtered)
-        for rem in removed:
+        print "Start remove words",len(removed)
+        
+        for i,rem in enumerate(removed):
+ #           if i%50==0:print i
             dataSets.removeWord(rem)
         return dataSets

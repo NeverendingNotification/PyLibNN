@@ -14,20 +14,15 @@ def makeDefaultSetting():
 def main():
     Rd,Sw,Pp,Tv=makeDefaultSetting()
     #read bag of words data 
-    print "Reading data now"
     data=Rd.readData()
-    print "Read data : ,",len(data.dataSets.keys())
-    print "Removing Stop Words"
+    print "D
     #remove Stopwords from data
     data=Sw.removeStopWords(data)
-    print "Removing Stop Words finish"
     #preprocessing
-    print "Preprocess"
     data=Pp.preprocess(data)
-    print "Preprocess finish"
-#    data.show()
+    data.show()
     #convert texts to vectors (option LSI)
-    data=Tv.texts2Vectors(data,LSI=1,nTopics=5)
+    data=Tv.texts2Vectors(data,LSI=1,nTopics=3)
     data.show(vector=1)
 
 if __name__=="__main__":

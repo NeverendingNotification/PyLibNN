@@ -62,7 +62,7 @@ class DataSets:
     def printLSIWeight(self):
         topics=self.LSIModel.print_topics()
         keys=self.dictionary.token2id.keys()
-        print "Keywords :",keys
+        print "Keywords :",len(keys)
         print " are reduced to ",len(topics)," topics by LSI"
         for n,topic in enumerate(topics):
             strs=topic.split("+")
