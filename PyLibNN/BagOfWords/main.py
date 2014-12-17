@@ -5,7 +5,7 @@ from AbsPreProcess import PreProcess as PreProcess
 from AbsTexts2Vectors import Texts2Vectors as Texts2Vectors
 
 def makeDefaultSetting():
-    Rd=ReadData([],targetDir="/home/nakamura/git/python/NLP-Tutorial/corpus")
+    Rd=ReadData([],targetDir="/tmp/")
     Sw=StopWords()
     Pp=PreProcess(lowerLimit=2)
     Tv=Texts2Vectors()
