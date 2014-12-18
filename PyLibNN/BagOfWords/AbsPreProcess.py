@@ -9,9 +9,10 @@ class PreProcess:
     def preprocess(self,dataSets):
         values=dataSets.getValues()
         dictionary=gensim.corpora.Dictionary(values)
-        print "Make Dict"
+
         dataSets.setDictionary(dictionary)
         unfiltered=dictionary.token2id.keys()
+        print "Make Dict",len(unfiltered)
         dictionary.filter_extremes(no_below=self.lowerLimit)
         filtered=dictionary.token2id.keys()
         removed=set(unfiltered)-set(filtered)

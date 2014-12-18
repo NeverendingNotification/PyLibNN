@@ -18,7 +18,14 @@ class BOWDataRaw(BOWData):
     def removeWord(self,word):
         while word in self.words:
             self.words.remove(word)
-        
+
+    def leaveWords(self,words):
+        newWords=[]
+        for word in self.words:
+            if word in words:
+                newWords.append(word)
+        self.words=newWords
+
     def getWords(self):
         return self.words
 
@@ -62,13 +69,26 @@ class DataSets:
     def printLSIWeight(self):
         topics=self.LSIModel.print_topics()
         keys=self.dictionary.token2id.keys()
+        vals=self.dictionary.values()
         print "Keywords :",len(keys)
+        for i,key in enumerate(keys):
+            print(i,key)
         print " are reduced to ",len(topics)," topics by LSI"
+#        self.LSIModel.print_topics()
         for n,topic in enumerate(topics):
             strs=topic.split("+")
+            ret=""
+            for st in strs:
+                txt="".join(st.split('"')).strip().split("*")
+                ret+=vals[int(txt[1])]+":"+txt[0]+","
+            print u"Topic:",n,ret.encode('utf-8')
+            """
             weights=[st.strip().split("*") for st in strs]
             weights.sort(key=lambda x:x[1])
-            print "Topic :",n,[w[0] for w in weights]
+            print "Topic:",n,topic
+            """
+#            print "Topic :",n,[w[0] for w in weights]
+
 
     def show(self,vector=0):
         if vector==1:            

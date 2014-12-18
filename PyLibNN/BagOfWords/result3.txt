@@ -1,0 +1,30 @@
+Reading data now
+Read data : , 100
+time : 0.430855989456
+Removing Stop Words
+Removing Stop Words finish
+time : 115.042217016
+Preprocess
+Make Dict 67535
+Start remove words 52485
+Preprocess finish
+time : 615.575114012
+LSI
+time : 1.53429508209
+Keywords : 15050
+0 (Table
+1 homomorphism
+2 Weisskopf
+3 (2))
+4 BSTRACT:
+5 Laplacian
+6 Traceback (most recent call last):
+  File "main.py", line 56, in <module>
+    main()
+  File "main.py", line 53, in main
+    data.show(vector=1)
+  File "/mnt/NN/PyLibNN/PyLibNN/BagOfWords/BOWData.py", line 80, in show
+    self.printLSIWeight()
+  File "/mnt/NN/PyLibNN/PyLibNN/BagOfWords/BOWData.py", line 67, in printLSIWeight
+    print i,key
+UnicodeEncodeError: 'ascii' codec can't encode character u'\u2019' in position 5: ordinal not in range(128)
