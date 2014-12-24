@@ -32,14 +32,14 @@ def convertBOW(fil,readData,stopWords,dic=0):
     
     return words
 
-def saveBOW(fil,bow,outdir="./"):
-    hndl=open(outdir+"result.txt","a")
+def saveBOW(fil,bow,outfile,outdir="./"):
+    hndl=open(outdir+outfile,"a")
     strs=fil.split("/")
     hndl.write("".join(strs[-2:])+u":"+str(bow)+u"\n")
     hndl.close()
 
 
-def convertFiles(outdir,filterFile="filter2.txt",**params):
+def convertFiles(outdir,outfile="result.txt",filterFile="filter2.txt",**params):
     readData=RD.ReadData([],**params)
     stopWords=SW.SWFilter(0,filterFile=filterFile)    
     filterWords=stopWords.filterWords
@@ -54,13 +54,14 @@ def convertFiles(outdir,filterFile="filter2.txt",**params):
     shutil.copyfile(filterFile,outdir+"/"+filterFile)
     n=0    
     showCount=1000
+    os.remove(outdir+outfile)
 #    print filterWords
-    for fil in files[:]:
+    for fil in files:
         bow=convertBOW(fil,readData,stopWords,dic=dic)
-        saveBOW(fil,bow,outdir=outdir)
+        saveBOW(fil,bow,outfile,outdir=outdir)
         n+=1
         if n%showCount==0:
-            print "count,"k,n,"time :",timer.show(stop=1),"(s)"
+            print "count",n,"time :",timer.show(stop=1),"(s)"
     
 def main():
     convertFiles("/mnt/bowdata/filterWavelength/",targetDir="/mnt/rawdata",rec=1)   
