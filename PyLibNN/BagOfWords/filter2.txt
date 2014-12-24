@@ -5,6 +5,7 @@ uv
 euv
 gamma-ray
 optical
+continuum
 visible
 gev
 mev

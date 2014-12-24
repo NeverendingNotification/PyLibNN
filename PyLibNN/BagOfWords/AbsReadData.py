@@ -4,7 +4,7 @@ import codecs
 class ReadData:
     #Reading data + removing symbols in the text
     def __init__(self,files,targetDir=0,removeSyms=[u".",u",",u"'",u'"',u'(',u')',u'&',u':',u';',u'[',u']',\
-                                                    u'{',u'}'],exts=u".txt",rec=0):
+                                                    u'{',u'}',u'>',u'<'],exts=u".txt",rec=0):
         #If targetDir is set find files in target directory
         if targetDir!=0:
             if rec==0:
@@ -17,6 +17,7 @@ class ReadData:
                     files.extend([os.path.join(dire,fil) for fil in os.listdir(dire)])
 #        self.files=files
         self.files=files[:]
+        
         self.removeSyms=removeSyms
     def removeSymbol(self,txt):
         for sym in self.removeSyms:

@@ -5,6 +5,7 @@ from AbsStopWords import SWFilter as StopWords
 from AbsPreProcess import PreProcess as PreProcess
 from AbsTexts2Vectors import Texts2Vectors as Texts2Vectors
 import time
+import convertBOW
 
 def makeDefaultSetting():
 #    Rd=ReadData([],targetDir="/mnt/rawdata/arXiv_pdf_1305_007")
@@ -29,7 +30,8 @@ class cpuTimer:
         self.sTime=self.eTime
         return dt
 
-def main():
+
+def mainOld():
     Rd,Sw,Pp,Tv=makeDefaultSetting()
     #read bag of words data 
     timer=cpuTimer()
@@ -53,10 +55,11 @@ def main():
     print "LSI"
     data=Tv.texts2Vectors(data,LSI=1,nTopics=5)
     print "time :",timer.show(stop=1)
-    data.outputfile("result2.txt")
+    data.outputfile("testAll.txt")
 #    data.show(vector=1)
 
-
+def main():
+    convertBOW.main()
 
 if __name__=="__main__":
     main()

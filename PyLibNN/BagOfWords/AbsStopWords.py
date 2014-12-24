@@ -6,6 +6,12 @@ class StopWords:
         if(stopWords==0):
             stopWords=['the', 'of', 'a', 'an','at', 'is']
         self.stopWords=stopWords
+
+    def removeStopWord(self,words):
+        for sw in self.stopWords:
+            while sw in words:
+                words.remove(sw)
+            
     
     def removeStopWords(self,dataSets):
         data=dataSets.dataSets
@@ -20,6 +26,14 @@ class SWFilter(StopWords):
             filterWords=open(filterFile).read().split("\n")[:-1]
         self.filterWords=filterWords            
         StopWords.__init__(self)
+
+    def removeStopWord(self,words):
+        newWords=[]
+        for word in words:
+            if word in self.filterWords:
+                newWords.append(word)
+        return newWords
+            
 
     
     def removeStopWords(self,dataSets):
