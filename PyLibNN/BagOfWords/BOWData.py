@@ -65,8 +65,31 @@ class DataSets:
             self.dataSets[name].removeWord(word)
     def setLSIModel(self,LSIModel):
         self.LSIModel=LSIModel
+
+    def getStrLSIWeight(self):
+        topics=self.LSIModel.print_topics()
+        keys=self.dictionary.token2id.keys()
+        vals=self.dictionary.values()
+        """
+        print "Keywords :",len(keys)
+        for i,key in enumerate(keys):
+            print(i,key)
+        print " are reduced to ",len(topics)," topics by LSI"
+        """
+        retStr=[]
+        for n,topic in enumerate(topics):
+            strs=topic.split("+")
+            ret=""
+            for st in strs:
+                txt="".join(st.split('"')).strip().split("*")
+                ret+=vals[int(txt[1])]+":"+txt[0]+","
+            retStr.append(ret.encode('utf-8'))
+        return retStr
     
     def printLSIWeight(self):
+        for n,ret in enumerate(self.getStrLSIWeight()):
+            print n,ret
+        """
         topics=self.LSIModel.print_topics()
         keys=self.dictionary.token2id.keys()
         vals=self.dictionary.values()
@@ -82,11 +105,11 @@ class DataSets:
                 txt="".join(st.split('"')).strip().split("*")
                 ret+=vals[int(txt[1])]+":"+txt[0]+","
             print u"Topic:",n,ret.encode('utf-8')
-            """
+
             weights=[st.strip().split("*") for st in strs]
             weights.sort(key=lambda x:x[1])
             print "Topic:",n,topic
-            """
+        """
 #            print "Topic :",n,[w[0] for w in weights]
 
 
@@ -99,3 +122,20 @@ class DataSets:
         for name in self.dataSets.keys():
             self.dataSets[name].show(vector=vector)
     
+    def outputfile(self,outfile):
+        hndl=open(outfile,"w")
+        hndl.write("KEYS\n")
+        keys=self.dictionary.token2id.keys()
+
+        for i,key in enumerate(keys):
+            hndl.write(str(i)+","+key+"\n")            
+
+        hndl.write("Topics \n")
+        retStrs=self.getStrLSIWeight()
+        for ret in retStrs:
+            hndl.write(ret+u"\n")
+        hndl.write("Names\n")
+        for name in self.dataSets.keys():
+            hndl.write(name+":"+str(self.dataSets[name].getVector())+"\n")
+        hndl.close()
+        

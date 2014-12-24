@@ -7,8 +7,9 @@ from AbsTexts2Vectors import Texts2Vectors as Texts2Vectors
 import time
 
 def makeDefaultSetting():
-    Rd=ReadData([],targetDir="/mnt/arXiv_pdf_1305_007")
-    Sw=StopWords(None,filterFile="filter.txt")
+#    Rd=ReadData([],targetDir="/mnt/rawdata/arXiv_pdf_1305_007")
+    Rd=ReadData([],targetDir="/mnt/rawdata",rec=1)
+    Sw=StopWords(None,filterFile="filter2.txt")
 #    Sw=StopWords(["euv","x-ray","ir","observation","theory","physics","algorithm","sun","galaxy"])
     Pp=PreProcess(lowerLimit=2)
     Tv=Texts2Vectors()
@@ -52,7 +53,10 @@ def main():
     print "LSI"
     data=Tv.texts2Vectors(data,LSI=1,nTopics=5)
     print "time :",timer.show(stop=1)
-    data.show(vector=1)
+    data.outputfile("result2.txt")
+#    data.show(vector=1)
+
+
 
 if __name__=="__main__":
     main()

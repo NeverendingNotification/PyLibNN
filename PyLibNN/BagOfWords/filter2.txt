@@ -1,0 +1,17 @@
+ir
+x-ray
+radio
+uv
+euv
+gamma-ray
+optical
+visible
+gev
+mev
+kev
+tev
+asca
+ginga
+suzaku
+astro-h
+tenma
