@@ -35,7 +35,7 @@ def convertBOW(fil,readData,stopWords,dic=0):
 def saveBOW(fil,bow,outfile,outdir="./"):
     hndl=open(outdir+outfile,"a")
     strs=fil.split("/")
-    hndl.write("".join(strs[-2:])+u":"+str(bow)+u"\n")
+    hndl.write("+".join(strs[-2:])+u":"+str(bow)+u"\n")
     hndl.close()
 
 
@@ -54,7 +54,8 @@ def convertFiles(outdir,outfile="result.txt",filterFile="filter2.txt",**params):
     shutil.copyfile(filterFile,outdir+"/"+filterFile)
     n=0    
     showCount=1000
-    os.remove(outdir+outfile)
+    if os.path.exists(outdir+outfile):
+        os.remove(outdir+outfile)
 #    print filterWords
     for fil in files:
         bow=convertBOW(fil,readData,stopWords,dic=dic)
@@ -63,8 +64,14 @@ def convertFiles(outdir,outfile="result.txt",filterFile="filter2.txt",**params):
         if n%showCount==0:
             print "count",n,"time :",timer.show(stop=1),"(s)"
     
-def main():
-    convertFiles("/mnt/bowdata/filterWavelength/",targetDir="/mnt/rawdata",rec=1)   
+
+from makeModel import main as modelMain
+def main(targetOut="/mnt/bowdata/filterAstroPhysics/",filterFile="filter3.txt"):
+    #convert files to bag of words vectors
+    convertFiles(targetOut,targetDir="/mnt/rawdata",filterFile=filterFile,rec=1)   
+    #make models and clasification 
+    modelMain(target=targetOut,filterFile=filterFile)
+    
 
 if __name__=="__main__":
     main()
