@@ -9,7 +9,6 @@ black-hole
 relativity
 relativistic
 pulsar
-neutron
 accretion
 dynamo
 planet

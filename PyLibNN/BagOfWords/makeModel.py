@@ -6,15 +6,16 @@ resultFile="result.txt"
 topicFile="topic.txt"
 
 class makeModel:
-    def __init__(self,dire,filterFile="filter.txt"):
+    def __init__(self,dire,filterFile="filter.txt",num_topics=5):
         self.targetDir=dire
         self.filterFile=filterFile
+        self.num_topics=num_topics
 
     def bow2Model(self):
         targetDir=self.targetDir
         
         corp=mC.corpusFile(targetDir+resultFile)
-        model=models.lsimodel.LsiModel(corp,num_topics=4)
+        model=models.lsimodel.LsiModel(corp,num_topics=self.num_topics)
         model.save(targetDir+modelFile)
 
     def reformTopic(self,model):
@@ -88,7 +89,7 @@ class makeModel:
 def main(target="/mnt/bowdata/filterWavelength/",filterFile="filter.txt"):
     output="output.txt"
     classfile="class.txt"
-    model=makeModel(target,filterFile=fil)
+    model=makeModel(target,filterFile=filterFile)
     if not os.path.exists(target+modelFile):
         model.bow2Model()
     if not os.path.exists(target+output):

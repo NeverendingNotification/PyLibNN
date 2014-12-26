@@ -4,8 +4,8 @@ from AbsReadData import ReadData as ReadData
 from AbsStopWords import SWFilter as StopWords
 from AbsPreProcess import PreProcess as PreProcess
 from AbsTexts2Vectors import Texts2Vectors as Texts2Vectors
-import time
 import convertBOW
+from timer import cpuTimer
 
 def makeDefaultSetting():
 #    Rd=ReadData([],targetDir="/mnt/rawdata/arXiv_pdf_1305_007")
@@ -15,20 +15,6 @@ def makeDefaultSetting():
     Pp=PreProcess(lowerLimit=2)
     Tv=Texts2Vectors()
     return Rd,Sw,Pp,Tv
-
-class cpuTimer:
-    def __init__(self):
-        self.sTime=-1.0
-        self.eTime=-1.0
-    def start(self):
-        self.sTime=time.time()
-    def stop(self):
-        self.eTime=time.time()
-    def show(self,stop=0):
-        if stop!=0:self.stop()
-        dt=self.eTime-self.sTime
-        self.sTime=self.eTime
-        return dt
 
 
 def mainOld():

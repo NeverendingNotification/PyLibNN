@@ -1,7 +1,7 @@
 import AbsReadData as RD
 import AbsStopWords as SW
 import codecs
-from main import cpuTimer
+from timer import cpuTimer
 import os
 import shutil
 import gensim
